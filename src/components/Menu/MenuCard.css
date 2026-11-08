@@ -1,0 +1,96 @@
+.menu-card {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid #262626;
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(245, 197, 24, 0.4);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.menu-card__image {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: #111;
+}
+
+.menu-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.5s;
+}
+
+.menu-card:hover .menu-card__image img {
+    transform: scale(1.08);
+}
+
+.menu-card__body {
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+}
+
+.menu-card__name {
+    font-size: 17px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.menu-card__desc {
+    font-size: 13px;
+    color: var(--muted);
+    flex: 1;
+}
+
+.menu-card__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 14px;
+}
+
+.menu-card__price {
+    color: var(--gold);
+    font-weight: 800;
+    font-size: 16px;
+}
+
+.menu-card__add {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--red);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    transition: 0.25s;
+    box-shadow: 0 6px 20px rgba(184, 29, 36, 0.4);
+}
+
+.menu-card__add:hover {
+    background: var(--gold);
+    color: #121212;
+    transform: rotate(90deg);
+}
+
+.menu-card__image {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: #111;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+}

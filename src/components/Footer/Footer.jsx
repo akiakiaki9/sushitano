@@ -1,7 +1,16 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { FiPhone, FiClock, FiInstagram } from "react-icons/fi";
 import "./Footer.css";
 
 export default function Footer() {
+    const [year, setYear] = useState(null);
+
+    useEffect(() => {
+        setYear(new Date().getFullYear());
+    }, []);
+
     return (
         <footer id="contact" className="footer">
             <div className="container footer__inner">
@@ -39,11 +48,11 @@ export default function Footer() {
                 </div>
             </div>
             <div className="footer__bottom">
-                <span suppressHydrationWarning>
-                    © {new Date().getFullYear()} Sushi Tano. Barcha huquqlar himoyalangan.
+                <span>
+                    © {year ?? ""} Sushi Tano. Barcha huquqlar himoyalangan.
                 </span>
                 <span className="footer__dev">
-                    Ishlab chiqdi{" "}
+                    Ishlab chiqildi{" "}
                     <a href="https://www.akbarsoft.uz" target="_blank" rel="noreferrer">
                         Akbar Soft
                     </a>

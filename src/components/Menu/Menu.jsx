@@ -8,12 +8,15 @@ import MenuCard from "./MenuCard";
 import "./Menu.css";
 
 export default function Menu() {
-    const [active, setActive] = useState("rolls");
+    const [active, setActive] = useState("all");
     const [selected, setSelected] = useState(null);
     const [qty, setQty] = useState(1);
     const { addToCart } = useCart();
 
-    const filtered = menuItems.filter((i) => i.category === active);
+    const filtered =
+        active === "all"
+            ? menuItems
+            : menuItems.filter((i) => i.category === active);
 
     // Блокировка скролла при открытой модалке
     useEffect(() => {
@@ -73,6 +76,7 @@ export default function Menu() {
                 </div>
             </div>
 
+            {/* Модалка блюда */}
             {/* Модалка блюда */}
             {selected && (
                 <div className="dish-modal" onClick={() => setSelected(null)}>

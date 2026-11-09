@@ -1,9 +1,9 @@
 import { CartProvider } from "@/context/CartContext";
 import "./globals.css";
 
-const SITE_URL = "https://sushitano.uz"; // поменяйте на реальный домен
+const SITE_URL = "https://www.sushitano.uz";
 const PHONE = "+998906369400";
-const TITLE = "Sushi Tano — Premium Sushi | Har luqmada did!";
+const TITLE = "Sushi va roll buyurtma qilish | Sushi Tano";
 const DESCRIPTION =
   "Sushi Tano — premium roll va setlar. Nozik ta'm, tez yetkazib berish. Har kuni 10:00–00:00. Buyurtma: +998 90 636 94 00.";
 
@@ -33,7 +33,7 @@ export const metadata = {
     canonical: "/",
   },
   icons: {
-    icon: [{ url: "/images/logo.png", type: "image/png" }],
+    icon: "/images/logo.png",
     shortcut: "/images/logo.png",
     apple: "/images/logo.png",
   },
@@ -112,8 +112,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="uz">
       <head>
-        <link rel="icon" href="/images/logo.png" type="image/png" />
-        <link rel="apple-touch-icon" href="/images/logo.png" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

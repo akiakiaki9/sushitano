@@ -91,10 +91,26 @@ export async function POST(req) {
             await answerCallback(cq.id);
 
             const replies = {
-                menu: `📋 <b>Menyu</b>\n\nTo'liq menyu: <a href="https://www.sushitano.uz">sushitano.uz</a>`,
-                order: `📞 <b>Buyurtma</b>\n\n<a href="tel:+998906369400">+998 90 636 94 00</a>`,
-                hours: `🕐 <b>Ish vaqti</b>\n\nHar kuni: <b>10:00 – 00:00</b>`,
-                location: `📍 <b>Manzil</b>\n\nToshkent shahri\n📞 <a href="tel:+998906369400">+998 90 636 94 00</a>`,
+                menu: `📋 <b>Menyu</b>\n\n` +
+                    `🍱 Setlar — 60 000 – 230 000 so'm\n` +
+                    `🍣 Rollar — 65 000 – 170 000 so'm\n` +
+                    `🥢 Qo'shimcha — 15 000 so'm\n\n` +
+                    `To'liq menyu va rasmlar: <a href="https://www.sushitano.uz/#menu">sushitano.uz</a>`,
+
+                order: `📞 <b>Buyurtma berish</b>\n\n` +
+                    `Qo'ng'iroq qiling:\n` +
+                    `<a href="tel:+998906369400">+998 90 636 94 00</a>\n\n` +
+                    `Yoki sayt orqali: <a href="https://www.sushitano.uz">sushitano.uz</a>\n\n` +
+                    `🚀 Tez yetkazib berish — 30–60 daqiqa`,
+
+                hours: `🕐 <b>Ish vaqti</b>\n\n` +
+                    `Har kuni: <b>10:00 – 00:00</b>\n\n` +
+                    `Dam olish kunlarisiz! 🎉`,
+
+                location: `📍 <b>Manzil</b>\n\n` +
+                    `<b>Buxoro shahar, 5-mikrorayon</b>\n` +
+                    `Korzinka yon tomoni\n\n` +
+                    `📞 <a href="tel:+998906369400">+998 90 636 94 00</a>`,
             };
 
             await sendMessage(

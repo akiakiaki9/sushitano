@@ -21,7 +21,7 @@ async function answerCallback(callbackId, text = "") {
   });
 }
 
-// ===== МЕНЮ =====
+// ===== MENYU =====
 const menuData = {
   sets: [
     { name: "Set Tano", desc: "Premium set", price: 210000 },
@@ -34,6 +34,10 @@ const menuData = {
     { name: "Mini set (zapechonniy, filadelfiya, jareniy)", desc: "Assorti", price: 110000 },
     { name: "Set Tano mix", desc: "5 xil rol, 40 dona", price: 190000 },
     { name: "Kombo set 1", desc: "40 roll + tar tar xleb + 1 kola", price: 230000 },
+    { name: "Set Sushi Tort", desc: "Bayram uchun sushi tort", price: 450000 },
+    { name: "Set Speshl", desc: "Maxsus to'plam", price: 150000 },
+    { name: "Set Kombo 2", desc: "Bonus: tar tar va kola", price: 230000 },
+    { name: "Sushi qayiq", desc: "To'y va tantanalar uchun — narx bo'yicha qo'ng'iroq", price: 0 },
   ],
   rolls: [
     { name: "Krevetka", desc: "8 dona", price: 80000 },
@@ -41,6 +45,14 @@ const menuData = {
     { name: "Avokado s nejniy krab", desc: "Avokado va yumshoq krab", price: 65000 },
     { name: "Roll Mango", desc: "Mango ta'mli roll", price: 70000 },
     { name: "Love KH", desc: "Sevgi uchun maxsus roll", price: 170000 },
+    { name: "Roll Zapechonniy losos", desc: "8 dona", price: 45000 },
+    { name: "Roll Filadelfiya", desc: "8 dona", price: 55000 },
+    { name: "Roll Kaliforniya", desc: "8 dona", price: 55000 },
+    { name: "Roll Mitaki", desc: "8 dona", price: 50000 },
+  ],
+  drinks: [
+    { name: "Kola 1L", desc: "Sovuq ichimlik", price: 15000 },
+    { name: "Kola 1.5L", desc: "Sovuq ichimlik", price: 20000 },
   ],
   extras: [
     { name: "Tar tar", desc: "Tar tar sousida", price: 15000 },
@@ -53,16 +65,20 @@ function buildMenuText(categoryId) {
   const titles = {
     sets: "🍱 <b>Setlar</b>",
     rolls: "🍣 <b>Rollar</b>",
+    drinks: "🥤 <b>Ichimliklar</b>",
     extras: "🥢 <b>Qo'shimcha</b>",
   };
   const items = menuData[categoryId] || [];
   const list = items
-    .map((i) => `• <b>${i.name}</b> — ${fmt(i.price)}\n  <i>${i.desc}</i>`)
+    .map((i) => {
+      const price = i.price > 0 ? fmt(i.price) : "Narx bo'yicha qo'ng'iroq";
+      return `• <b>${i.name}</b> — ${price}\n  <i>${i.desc}</i>`;
+    })
     .join("\n\n");
   return `${titles[categoryId]}\n\n${list}\n\n📞 Buyurtma: +998 90 636 94 00`;
 }
 
-// ===== REPLY-КЛАВИАТУРЫ (встроенные внизу) =====
+// ===== REPLY-КЛАВИАТУРА (внизу экрана) =====
 const mainReplyKeyboard = {
   keyboard: [
     [{ text: "🍣 Menyu" }, { text: "📞 Buyurtma" }],
@@ -72,7 +88,7 @@ const mainReplyKeyboard = {
   is_persistent: true,
 };
 
-// ===== INLINE-КЛАВИАТУРЫ (внутри меню) =====
+// ===== INLINE-КЛАВИАТУРЫ =====
 const menuInlineKeyboard = {
   inline_keyboard: [
     [
@@ -80,15 +96,14 @@ const menuInlineKeyboard = {
       { text: "🍣 Rollar", callback_data: "cat_rolls" },
     ],
     [
+      { text: "🥤 Ichimliklar", callback_data: "cat_drinks" },
       { text: "🥢 Qo'shimcha", callback_data: "cat_extras" },
     ],
   ],
 };
 
 const categoryInlineKeyboard = {
-  inline_keyboard: [
-    [{ text: "⬅️ Menyuga", callback_data: "menu" }],
-  ],
+  inline_keyboard: [[{ text: "⬅️ Menyuga", callback_data: "menu" }]],
 };
 
 const locationInlineKeyboard = {
@@ -133,7 +148,6 @@ export async function POST(req) {
   try {
     const update = await req.json();
 
-    // --- Текстовые сообщения (reply-кнопки приходят как текст) ---
     if (update.message) {
       const { chat, text = "" } = update.message;
 
@@ -187,7 +201,6 @@ export async function POST(req) {
       }
     }
 
-    // --- Inline-кнопки ---
     if (update.callback_query) {
       const cq = update.callback_query;
       const chatId = cq.message.chat.id;

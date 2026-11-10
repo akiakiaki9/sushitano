@@ -7,7 +7,8 @@ import "./MenuCard.css";
 export default function MenuCard({ item, onOpen }) {
     const { addToCart } = useCart();
 
-    const formatPrice = (p) => p.toLocaleString("ru-RU") + " so'm";
+    const formatPrice = (p) =>
+        p > 0 ? p.toLocaleString("ru-RU") + " so'm" : "Narx bo'yicha qo'ng'iroq";
 
     return (
         <div className="menu-card">
